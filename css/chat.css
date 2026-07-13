@@ -150,6 +150,11 @@
   color: var(--text-muted-dark);
 }
 
+.chat-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -255,6 +260,59 @@
   padding: 16px 20px;
   border-top: var(--glass-border);
   background: rgba(10, 22, 40, 0.6);
+}
+
+.chat-report-form {
+  display: none;
+  margin-bottom: 12px;
+  padding: 14px;
+  background: var(--bg-dark-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.chat-report-form.active {
+  display: block;
+}
+
+.chat-report-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.chat-report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.chat-report-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted-dark);
+}
+
+.chat-report-grid input,
+.chat-report-grid select,
+.chat-report-grid textarea {
+  width: 100%;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  background: var(--bg-dark-glass);
+  color: var(--text-primary-dark);
+  padding: 8px 10px;
+}
+
+.chat-report-grid textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.chat-report-wide {
+  grid-column: 1 / -1;
 }
 
 .chat-input-wrapper {
@@ -382,5 +440,9 @@
     bottom: 0;
     width: 300px;
     z-index: var(--z-overlay);
+  }
+
+  .chat-report-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -17,15 +17,12 @@
     <div class="main-wrapper">
       <header class="topbar" id="topbar"></header>
       <main class="main-content" id="dashboardContent">
-        <!-- KPI Cards -->
         <div class="kpi-grid" id="kpiGrid"></div>
 
-        <!-- Main Grid -->
         <div class="grid-dashboard">
-          <!-- Map -->
-          <div class="card">
+          <div class="dashboard-map-card card">
             <div class="card-header">
-              <div class="card-title">Bản đồ Dự án</div>
+              <div class="card-title">Phân bố công trường</div>
               <a href="construction-sites.html" class="btn btn-sm btn-secondary">Xem tất cả</a>
             </div>
             <div class="card-body" style="padding:0">
@@ -33,20 +30,17 @@
             </div>
           </div>
 
-          <!-- Right Column -->
-          <div style="display:flex;flex-direction:column;gap:20px">
-            <!-- Progress -->
+          <div class="dashboard-side-stack">
             <div class="card">
               <div class="card-header">
-                <div class="card-title">Tiến độ Dự án</div>
+                <div class="card-title">Tiến độ tổng hợp</div>
               </div>
               <div class="card-body" id="progressList"></div>
             </div>
 
-            <!-- Recent Warnings -->
             <div class="card">
               <div class="card-header">
-                <div class="card-title">Cảnh báo Gần đây</div>
+                <div class="card-title">Cảnh báo gần nhất</div>
                 <a href="warning.html" class="btn btn-sm btn-secondary">Tất cả</a>
               </div>
               <div class="card-body" id="recentWarnings" style="padding:12px"></div>
@@ -54,11 +48,10 @@
           </div>
         </div>
 
-        <!-- Bottom Row -->
         <div class="dashboard-bottom">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Báo cáo Hàng ngày</div>
+              <div class="card-title">Số lượng báo cáo theo ngày</div>
             </div>
             <div class="card-body">
               <div class="chart-container" id="dailyChart"></div>
@@ -67,7 +60,7 @@
 
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Thống kê Cảnh báo</div>
+              <div class="card-title">Tỷ lệ cảnh báo</div>
             </div>
             <div class="card-body">
               <div class="chart-container" id="warningChart"></div>
@@ -76,7 +69,7 @@
 
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Hoạt động Gần đây</div>
+              <div class="card-title">Hoạt động gần đây</div>
             </div>
             <div class="card-body" id="activityFeed"></div>
           </div>

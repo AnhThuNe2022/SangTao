@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Base - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content">
+        <section class="knowledge-hero">
+          <h1>Thư viện tri thức</h1>
+          <p>Tìm kiếm tài liệu, quy trình, sự cố và bài học kinh nghiệm.</p>
+          <div class="knowledge-search">
+            <span id="knowledgeSearchIcon"></span>
+            <input id="knowledgeSearch" placeholder="Tìm kiếm tri thức, sự cố, giải pháp...">
+          </div>
+          <div class="knowledge-tags" id="knowledgeTags"></div>
+        </section>
+        <div class="knowledge-grid" id="knowledgeGrid"></div>
+        <div class="knowledge-stats">
+          <div class="knowledge-stat"><div class="knowledge-stat-value">342</div><div class="knowledge-stat-label">Tổng bài viết</div></div>
+          <div class="knowledge-stat"><div class="knowledge-stat-value">1,248</div><div class="knowledge-stat-label">Lượt xem tuần này</div></div>
+          <div class="knowledge-stat"><div class="knowledge-stat-value">26</div><div class="knowledge-stat-label">Đóng góp</div></div>
+          <div class="knowledge-stat"><div class="knowledge-stat-value">98%</div><div class="knowledge-stat-label">Độ hài lòng</div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/knowledge.js"></script>
+</body>
+</html>

@@ -6,10 +6,20 @@
 .map-container {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 420px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: linear-gradient(180deg, #0a2540 0%, #0d2137 100%);
+}
+
+.dashboard-side-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-map-card {
+  min-height: 100%;
 }
 
 .map-container svg {
@@ -154,6 +164,14 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 20px;
+}
+
+.grid-dashboard {
+  grid-template-columns: minmax(0, 1.25fr) 380px;
+}
+
+.dashboard-bottom .card {
+  min-height: 280px;
 }
 
 @media (max-width: 1024px) {

@@ -27,12 +27,11 @@ function renderKPI() {
   if (!grid) return;
 
   const items = [
-    { label: 'Dự án', value: kpi.totalProjects, icon: 'projects', color: 'blue', trend: '+2', up: true },
+    { label: 'Công trường', value: kpi.totalProjects, icon: 'sites', color: 'blue', trend: '+2', up: true },
     { label: 'Hạng mục', value: kpi.totalItems, icon: 'sites', color: 'purple', trend: '+8', up: true },
     { label: 'Tiến độ TB', value: kpi.avgProgress + '%', icon: 'roadmap', color: 'green', trend: '+1.2%', up: true },
     { label: 'Cảnh báo', value: kpi.activeWarnings, icon: 'warning', color: 'red', trend: '+3', up: false },
-    { label: 'Nhân sự Online', value: kpi.onlineStaff, icon: 'chat', color: 'orange', trend: '', up: true },
-    { label: 'Báo cáo Hôm nay', value: kpi.dailyReports, icon: 'report', color: 'blue', trend: '+5', up: true }
+    { label: 'Sự cố đang xử lý', value: 12, icon: 'report', color: 'orange', trend: '', up: true }
   ];
 
   grid.innerHTML = items.map(item => `
@@ -50,7 +49,7 @@ function renderProgress() {
   const list = document.getElementById('progressList');
   if (!list) return;
 
-  const projects = MOCK_DATA.projects.filter(p => p.status === 'active').slice(0, 5);
+  const projects = MOCK_DATA.projects.filter(p => p.status === 'active').slice(0, 6);
 
   list.innerHTML = projects.map(p => {
     const color = p.progress >= 80 ? 'green' : p.progress >= 50 ? 'blue' : 'orange';
@@ -87,7 +86,7 @@ function renderActivities() {
   const feed = document.getElementById('activityFeed');
   if (!feed) return;
 
-  const activities = Storage.get(Storage.KEYS.ACTIVITIES, MOCK_DATA.activities).slice(0, 6);
+  const activities = Storage.get(Storage.KEYS.ACTIVITIES, MOCK_DATA.activities).slice(0, 5);
   const dotColors = { report: 'blue', ai: 'purple', update: 'green', approve: 'green', warning: 'red', upload: 'blue', complete: 'green' };
 
   feed.innerHTML = `<div class="activity-list">${activities.map(a => `

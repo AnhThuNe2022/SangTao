@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderChannels();
   renderMessages(currentChannel);
+  populateReportForm();
   bindChatEvents();
 });
 
@@ -88,8 +89,14 @@ function formatMessage(text) {
 function bindChatEvents() {
   const input = document.getElementById('chatInput');
   const sendBtn = document.getElementById('chatSend');
+  const reportForm = document.getElementById('chatReportForm');
 
   function sendMessage() {
+    if (reportForm?.classList.contains('active')) {
+      sendReportMessage();
+      return;
+    }
+
     const text = input.value.trim();
     if (!text) return;
 
@@ -163,4 +170,78 @@ function bindChatEvents() {
   document.getElementById('toggleInfo')?.addEventListener('click', () => {
     document.getElementById('chatInfoPanel')?.classList.toggle('mobile-open');
   });
+
+  document.getElementById('toggleReportForm')?.addEventListener('click', () => {
+    reportForm?.classList.toggle('active');
+    input.placeholder = reportForm?.classList.contains('active')
+      ? 'Nhấn gửi để tạo tin báo cáo từ form...'
+      : 'Nhập tin nhắn...';
+  });
+}
+
+function populateReportForm() {
+  const projectSelect = document.getElementById('chatReportProject');
+  const siteSelect = document.getElementById('chatReportSite');
+  if (!projectSelect || !siteSelect) return;
+
+  projectSelect.innerHTML = '<option value="">Chọn dự án</option>' +
+    MOCK_DATA.projects.filter(p => p.status === 'active').map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+  siteSelect.innerHTML = '<option value="">Chọn hạng mục</option>';
+
+  projectSelect.addEventListener('change', () => {
+    const project = MOCK_DATA.projects.find(p => p.name === projectSelect.value);
+    siteSelect.innerHTML = '<option value="">Chọn hạng mục</option>' +
+      (project?.items || []).map(item => `<option value="${item.name}">${item.name}</option>`).join('');
+  });
+}
+
+function sendReportMessage() {
+  const form = document.getElementById('chatReportForm');
+  const project = document.getElementById('chatReportProject').value;
+  const site = document.getElementById('chatReportSite').value;
+  const location = document.getElementById('chatReportLocation').value.trim();
+  const severity = document.getElementById('chatReportSeverity').value;
+  const description = document.getElementById('chatReportDescription').value.trim();
+
+  if (!project || !site || !description) {
+    App.toast('Vui lòng nhập đủ dự án, hạng mục và mô tả', 'warning');
+    return;
+  }
+
+  const user = Auth.getUser();
+  const report = {
+    project,
+    site,
+    category: site,
+    location,
+    severity,
+    description,
+    reporter: user.name,
+    avatar: user.avatar,
+    hasImage: false
+  };
+
+  Storage.addReport(report, { skipChat: true });
+
+  const reportCode = 'BC-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Date.now().toString().slice(-3);
+  const customText = `📋 **Báo cáo hiện trường ${reportCode}**\n• Dự án: ${project}\n• Hạng mục: ${site}\n• Vị trí: ${location || 'Chưa cập nhật'}\n• Mức độ: ${App.severityLabel(severity)}\n• Mô tả: ${description}`;
+
+  Storage.addChatMessage(currentChannel, {
+    user: user.name,
+    avatar: user.avatar,
+    text: customText
+  });
+  Storage.addChatMessage(currentChannel, {
+    user: 'AI Assistant',
+    avatar: '🤖',
+    text: `🤖 Đã ghi nhận báo cáo ${reportCode} vào hệ thống. Dashboard, Trung tâm Cảnh báo và Thông báo đã được cập nhật theo mức độ **${App.severityLabel(severity)}**.`,
+    isBot: true
+  });
+
+  form.reset();
+  document.getElementById('chatReportSite').innerHTML = '<option value="">Chọn hạng mục</option>';
+  form.classList.remove('active');
+  document.getElementById('chatInput').placeholder = 'Nhập tin nhắn...';
+  renderMessages(currentChannel);
+  App.toast('Đã ghi báo cáo vào hệ thống', 'success');
 }

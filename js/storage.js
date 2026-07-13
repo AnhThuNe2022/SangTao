@@ -75,7 +75,7 @@ const Storage = {
   },
 
   /** Thêm báo cáo mới từ form */
-  addReport(report) {
+  addReport(report, options = {}) {
     const reports = this.get(this.KEYS.REPORTS, []);
     const newReport = {
       id: 'r' + Date.now(),
@@ -118,13 +118,14 @@ const Storage = {
       });
     }
 
-    // Thêm tin nhắn chat
-    this.addChatMessage('ch1', {
-      user: report.reporter || 'Trần Minh C',
-      avatar: 'TMC',
-      text: `📋 Báo cáo mới: ${report.description}`,
-      hasImage: report.hasImage || false
-    });
+    if (!options.skipChat) {
+      this.addChatMessage('ch1', {
+        user: report.reporter || 'Trần Minh C',
+        avatar: report.avatar || 'TMC',
+        text: `📋 Báo cáo mới: ${report.description}`,
+        hasImage: report.hasImage || false
+      });
+    }
 
     return newReport;
   },
