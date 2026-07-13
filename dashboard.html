@@ -10,70 +10,87 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body class="theme-dark">
+<body class="theme-dark dashboard-page">
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="app-layout">
     <aside class="sidebar" id="sidebar"></aside>
     <div class="main-wrapper">
       <header class="topbar" id="topbar"></header>
-      <main class="main-content" id="dashboardContent">
-        <div class="kpi-grid" id="kpiGrid"></div>
-
-        <div class="grid-dashboard">
-          <div class="dashboard-map-card card">
-            <div class="card-header">
-              <div class="card-title">Phân bố công trường</div>
-              <a href="construction-sites.html" class="btn btn-sm btn-secondary">Xem tất cả</a>
-            </div>
-            <div class="card-body" style="padding:0">
-              <div class="map-container" id="projectMap"></div>
-            </div>
+      <main class="main-content dashboard-control" id="dashboardContent">
+        <section class="dashboard-hero">
+          <div>
+            <h1>Trung tâm điều hành công trường hợp nhất</h1>
+            <p>Tổng quan toàn bộ dự án và công trường</p>
           </div>
-
-          <div class="dashboard-side-stack">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Tiến độ tổng hợp</div>
-              </div>
-              <div class="card-body" id="progressList"></div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Cảnh báo gần nhất</div>
-                <a href="warning.html" class="btn btn-sm btn-secondary">Tất cả</a>
-              </div>
-              <div class="card-body" id="recentWarnings" style="padding:12px"></div>
-            </div>
+          <div class="dashboard-filters">
+            <label>
+              <span>Ngày</span>
+              <input type="date" value="2026-05-13">
+            </label>
+            <label>
+              <span>Dự án</span>
+              <select id="dashboardProjectFilter">
+                <option value="all">Tất cả dự án</option>
+              </select>
+            </label>
           </div>
-        </div>
+        </section>
 
-        <div class="dashboard-bottom">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Số lượng báo cáo theo ngày</div>
-            </div>
-            <div class="card-body">
-              <div class="chart-container" id="dailyChart"></div>
-            </div>
-          </div>
+        <section class="dashboard-kpi-grid" id="kpiGrid"></section>
 
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Tỷ lệ cảnh báo</div>
+        <section class="dashboard-main-grid">
+          <article class="dashboard-panel map-panel">
+            <div class="panel-header">
+              <h2>Bản đồ công trường</h2>
             </div>
-            <div class="card-body">
-              <div class="chart-container" id="warningChart"></div>
-            </div>
-          </div>
+            <div class="map-container" id="projectMap"></div>
+          </article>
 
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Hoạt động gần đây</div>
+          <article class="dashboard-panel progress-panel">
+            <div class="panel-header">
+              <h2>Tiến độ dự án</h2>
             </div>
-            <div class="card-body" id="activityFeed"></div>
-          </div>
-        </div>
+            <div class="progress-overview">
+              <div class="progress-donut" id="progressDonut"></div>
+              <div class="progress-legend" id="progressLegend"></div>
+            </div>
+            <div class="weekly-progress">
+              <h3>Tiến độ trung bình theo tuần</h3>
+              <div class="weekly-chart" id="weeklyProgressChart"></div>
+            </div>
+          </article>
+
+          <article class="dashboard-panel alerts-panel">
+            <div class="panel-header">
+              <h2>Cảnh báo mới nhất</h2>
+              <a href="warning.html">Xem tất cả</a>
+            </div>
+            <div class="alert-list" id="recentWarnings"></div>
+          </article>
+
+          <article class="dashboard-panel important-progress-panel">
+            <div class="panel-header">
+              <h2>Tiến độ dự án quan trọng</h2>
+              <a href="projects.html">Xem tất cả</a>
+            </div>
+            <div class="project-progress-table" id="importantProjects"></div>
+          </article>
+
+          <article class="dashboard-panel activity-panel">
+            <div class="panel-header">
+              <h2>Hoạt động gần đây</h2>
+            </div>
+            <div class="dashboard-activity-list" id="activityFeed"></div>
+          </article>
+
+          <article class="dashboard-panel live-panel">
+            <div class="panel-header">
+              <h2>Hình ảnh trực tiếp từ công trường</h2>
+              <a href="construction-sites.html">Xem tất cả</a>
+            </div>
+            <div class="live-grid" id="liveSites"></div>
+          </article>
+        </section>
       </main>
     </div>
   </div>
