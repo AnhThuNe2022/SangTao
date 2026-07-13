@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content" id="dashboardContent">
+        <!-- KPI Cards -->
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <!-- Main Grid -->
+        <div class="grid-dashboard">
+          <!-- Map -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Bản đồ Dự án</div>
+              <a href="construction-sites.html" class="btn btn-sm btn-secondary">Xem tất cả</a>
+            </div>
+            <div class="card-body" style="padding:0">
+              <div class="map-container" id="projectMap"></div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <!-- Progress -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Tiến độ Dự án</div>
+              </div>
+              <div class="card-body" id="progressList"></div>
+            </div>
+
+            <!-- Recent Warnings -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Cảnh báo Gần đây</div>
+                <a href="warning.html" class="btn btn-sm btn-secondary">Tất cả</a>
+              </div>
+              <div class="card-body" id="recentWarnings" style="padding:12px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="dashboard-bottom">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Báo cáo Hàng ngày</div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container" id="dailyChart"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Thống kê Cảnh báo</div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container" id="warningChart"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Hoạt động Gần đây</div>
+            </div>
+            <div class="card-body" id="activityFeed"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

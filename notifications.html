@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông báo - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content">
+        <div class="page-header">
+          <div>
+            <h1>Thông báo</h1>
+            <p class="page-header-desc" id="notifCount"></p>
+          </div>
+          <button class="btn btn-sm btn-secondary" id="markAllRead">Đánh dấu đã đọc</button>
+        </div>
+        <div class="card">
+          <div class="notification-list" id="notificationList"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.requireAuth()) return;
+      Storage.init();
+      Layout.render('notifications', { pageTitle: 'Thông báo' });
+
+      function render() {
+        const notifications = Storage.get(Storage.KEYS.NOTIFICATIONS, MOCK_DATA.notifications);
+        const unread = notifications.filter(n => !n.read).length;
+        document.getElementById('notifCount').textContent = `${unread} thông báo chưa đọc`;
+
+        const iconMap = {
+          critical: { bg: 'var(--color-danger-bg)', color: 'var(--color-danger)', icon: '⚠️' },
+          high: { bg: 'var(--color-warning-bg)', color: 'var(--color-warning)', icon: '🔔' },
+          medium: { bg: 'var(--color-caution-bg)', color: 'var(--color-caution)', icon: '📋' },
+          info: { bg: 'var(--color-info-bg)', color: 'var(--color-info)', icon: 'ℹ️' },
+          success: { bg: 'var(--color-success-bg)', color: 'var(--color-success)', icon: '✅' },
+          low: { bg: 'var(--color-success-bg)', color: 'var(--color-success)', icon: '📌' }
+        };
+
+        document.getElementById('notificationList').innerHTML = notifications.map(n => {
+          const ic = iconMap[n.severity] || iconMap.info;
+          return `
+            <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}">
+              <div class="notification-icon" style="background:${ic.bg};color:${ic.color}">${ic.icon}</div>
+              <div class="notification-content">
+                <div class="notification-title">${n.title}</div>
+                <div class="notification-desc">${n.desc}</div>
+              </div>
+              <div class="notification-time">${App.timeAgo(n.time)}</div>
+            </div>`;
+        }).join('');
+
+        // Mark as read on click
+        document.querySelectorAll('.notification-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const notifications = Storage.get(Storage.KEYS.NOTIFICATIONS, []);
+            const n = notifications.find(n => n.id === item.dataset.id);
+            if (n) n.read = true;
+            Storage.set(Storage.KEYS.NOTIFICATIONS, notifications);
+            render();
+          });
+        });
+      }
+
+      render();
+
+      document.getElementById('markAllRead').addEventListener('click', () => {
+        Storage.markAllRead();
+        render();
+        App.toast('Đã đánh dấu tất cả đã đọc', 'success');
+      });
+    });
+  </script>
+</body>
+</html>

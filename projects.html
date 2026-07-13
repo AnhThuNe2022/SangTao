@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Dự án - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content">
+        <!-- List View -->
+        <div id="projectListView">
+          <div class="page-header">
+            <div>
+              <h1>Quản lý Dự án</h1>
+              <p class="page-header-desc">Theo dõi tiến độ và quản lý 15 dự án cao tốc</p>
+            </div>
+            <div style="display:flex;gap:8px">
+              <select class="form-select" id="filterStatus" style="width:auto">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="active">Đang thi công</option>
+                <option value="completed">Hoàn thành</option>
+              </select>
+              <select class="form-select" id="filterRisk" style="width:auto">
+                <option value="all">Tất cả rủi ro</option>
+                <option value="high">Rủi ro cao</option>
+                <option value="medium">Rủi ro TB</option>
+                <option value="low">Rủi ro thấp</option>
+              </select>
+            </div>
+          </div>
+          <div class="project-grid" id="projectGrid"></div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="projectDetailView" style="display:none">
+          <div class="page-header">
+            <div>
+              <button class="btn btn-ghost" id="backToList" style="margin-bottom:8px;padding-left:0">← Quay lại danh sách</button>
+              <h1 id="detailTitle"></h1>
+              <p class="page-header-desc" id="detailLocation"></p>
+            </div>
+            <span class="badge" id="detailRisk"></span>
+          </div>
+
+          <div class="kpi-grid" id="detailKPI" style="grid-template-columns:repeat(4,1fr)"></div>
+
+          <div class="tabs" id="detailTabs">
+            <button class="tab active" data-tab="tabProgress">Tiến độ</button>
+            <button class="tab" data-tab="tabChart">Biểu đồ</button>
+            <button class="tab" data-tab="tabLog">Nhật ký</button>
+            <button class="tab" data-tab="tabIncidents">Sự cố</button>
+            <button class="tab" data-tab="tabChat">Chat</button>
+            <button class="tab" data-tab="tabKnowledge">Knowledge</button>
+          </div>
+
+          <div class="tab-panel active" id="tabProgress">
+            <div class="card"><div class="card-body" id="detailProgress"></div></div>
+          </div>
+          <div class="tab-panel" id="tabChart">
+            <div class="card"><div class="card-body"><div class="chart-container" id="detailChart"></div></div></div>
+          </div>
+          <div class="tab-panel" id="tabLog">
+            <div class="card"><div class="card-body"><div class="timeline" id="detailLog"></div></div></div>
+          </div>
+          <div class="tab-panel" id="tabIncidents">
+            <div class="card"><div class="card-body" id="detailIncidents"></div></div>
+          </div>
+          <div class="tab-panel" id="tabChat">
+            <div class="card"><div class="card-body" id="detailChat"></div></div>
+          </div>
+          <div class="tab-panel" id="tabKnowledge">
+            <div class="card"><div class="card-body" id="detailKnowledge"></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/projects.js"></script>
+</body>
+</html>

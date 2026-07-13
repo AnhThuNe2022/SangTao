@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm Cảnh báo - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content">
+        <div class="page-header">
+          <div>
+            <h1>Trung tâm Cảnh báo</h1>
+            <p class="page-header-desc">Giám sát và xử lý cảnh báo từ AI và hệ thống</p>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm btn-secondary filter-btn active" data-filter="all">Tất cả</button>
+            <button class="btn btn-sm btn-secondary filter-btn" data-filter="critical">🔴 Nguy hiểm</button>
+            <button class="btn btn-sm btn-secondary filter-btn" data-filter="high">🟠 Cảnh báo</button>
+            <button class="btn btn-sm btn-secondary filter-btn" data-filter="medium">🟡 TB</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="kpi-grid" id="warningStats" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px"></div>
+
+        <!-- Warning List -->
+        <div id="warningList"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.requireAuth()) return;
+      Storage.init();
+      Layout.render('warning', { pageTitle: 'Trung tâm Cảnh báo' });
+
+      let currentFilter = 'all';
+
+      function renderStats() {
+        const warnings = Storage.get(Storage.KEYS.WARNINGS, MOCK_DATA.warnings);
+        const counts = { critical: 0, high: 0, medium: 0, low: 0 };
+        warnings.forEach(w => counts[w.severity]++);
+
+        document.getElementById('warningStats').innerHTML = [
+          { label: 'Nguy hiểm', value: counts.critical, color: 'red' },
+          { label: 'Cảnh báo', value: counts.high, color: 'orange' },
+          { label: 'Trung bình', value: counts.medium, color: 'caution' },
+          { label: 'Bình thường', value: counts.low, color: 'green' }
+        ].map(s => `
+          <div class="kpi-card">
+            <div class="kpi-icon ${s.color}">${Icons.warning}</div>
+            <div class="kpi-value">${s.value}</div>
+            <div class="kpi-label">${s.label}</div>
+          </div>`).join('');
+      }
+
+      function renderWarnings() {
+        let warnings = Storage.get(Storage.KEYS.WARNINGS, MOCK_DATA.warnings);
+        if (currentFilter !== 'all') warnings = warnings.filter(w => w.severity === currentFilter);
+
+        document.getElementById('warningList').innerHTML = warnings.map(w => `
+          <div class="warning-item severity-${w.severity}" onclick="showWarningDetail('${w.id}')">
+            <div class="warning-icon ${w.severity}">${Icons.warning}</div>
+            <div class="warning-content">
+              <div class="warning-title">${w.title}</div>
+              <div class="warning-desc">${w.description}</div>
+              <div class="warning-meta">
+                <span class="badge ${App.severityBadge(w.severity)}">${App.severityLabel(w.severity)}</span>
+                &nbsp; ${w.project} · ${w.site} · ${App.timeAgo(w.time)}
+              </div>
+            </div>
+          </div>`).join('');
+      }
+
+      window.showWarningDetail = function(id) {
+        const w = Storage.get(Storage.KEYS.WARNINGS, []).find(w => w.id === id);
+        if (!w) return;
+
+        App.showModal(w.title, `
+          <p style="margin-bottom:16px">${w.description}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.875rem">
+            <div><strong>Dự án:</strong> ${w.project}</div>
+            <div><strong>Công trường:</strong> ${w.site}</div>
+            <div><strong>Danh mục:</strong> ${w.category}</div>
+            <div><strong>Mức độ:</strong> <span class="badge ${App.severityBadge(w.severity)}">${App.severityLabel(w.severity)}</span></div>
+            <div><strong>Thời gian:</strong> ${App.formatDateTime(w.time)}</div>
+            <div><strong>Trạng thái:</strong> ${w.status === 'open' ? '🔴 Mở' : '🟡 Đang xử lý'}</div>
+          </div>`,
+          `<button class="btn btn-secondary" onclick="App.closeModal()">Đóng</button>
+           <button class="btn btn-primary" onclick="App.closeModal();App.toast('Đã giao việc xử lý','success')">Giao xử lý</button>`
+        );
+
+        // Add notification popup
+        App.toast(`Cảnh báo: ${w.title}`, w.severity === 'critical' ? 'error' : 'warning');
+      };
+
+      renderStats();
+      renderWarnings();
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderWarnings();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

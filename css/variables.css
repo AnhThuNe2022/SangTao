@@ -1,0 +1,87 @@
+/**
+ * Operation Hub - Design Tokens
+ * Phong cách: Azure Portal / Microsoft Fluent / Glassmorphism
+ */
+
+:root {
+  /* Brand Colors */
+  --color-primary: #0078d4;
+  --color-primary-hover: #106ebe;
+  --color-primary-light: #deecf9;
+  --color-accent: #00bcf2;
+  --color-brand-navy: #001529;
+  --color-brand-blue: #002140;
+
+  /* Backgrounds - Dark Theme (Dashboard) */
+  --bg-dark-primary: #0a1628;
+  --bg-dark-secondary: #0d2137;
+  --bg-dark-tertiary: #132f4c;
+  --bg-dark-card: rgba(19, 47, 76, 0.65);
+  --bg-dark-glass: rgba(255, 255, 255, 0.04);
+  --bg-dark-hover: rgba(255, 255, 255, 0.08);
+
+  /* Backgrounds - Light Theme (Knowledge, Settings) */
+  --bg-light-primary: #f5f7fa;
+  --bg-light-secondary: #ffffff;
+  --bg-light-tertiary: #eef2f6;
+
+  /* Status Colors */
+  --color-danger: #ff4d4f;
+  --color-danger-bg: rgba(255, 77, 79, 0.15);
+  --color-warning: #ffa940;
+  --color-warning-bg: rgba(255, 169, 64, 0.15);
+  --color-caution: #faad14;
+  --color-caution-bg: rgba(250, 173, 20, 0.15);
+  --color-success: #52c41a;
+  --color-success-bg: rgba(82, 196, 26, 0.15);
+  --color-info: #1890ff;
+  --color-info-bg: rgba(24, 144, 255, 0.15);
+
+  /* Text */
+  --text-primary-dark: #ffffff;
+  --text-secondary-dark: rgba(255, 255, 255, 0.75);
+  --text-muted-dark: rgba(255, 255, 255, 0.45);
+  --text-primary-light: #1a1a2e;
+  --text-secondary-light: #4a5568;
+  --text-muted-light: #8c9bab;
+
+  /* Borders */
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-light: #e2e8f0;
+  --border-focus: var(--color-primary);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px rgba(0, 120, 212, 0.3);
+
+  /* Glassmorphism */
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Spacing */
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 72px;
+  --header-height: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Typography */
+  --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  --font-mono: 'Cascadia Code', 'Consolas', monospace;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Z-index */
+  --z-sidebar: 100;
+  --z-header: 110;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}

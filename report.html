@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo cáo Hiện trường - Operation Hub</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body class="theme-dark">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-wrapper">
+      <header class="topbar" id="topbar"></header>
+      <main class="main-content" style="padding:0">
+        <div class="mobile-frame-wrapper">
+          <div class="mobile-frame">
+            <div class="mobile-screen">
+              <div class="mobile-notch"></div>
+              <div class="mobile-status-bar">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+              </div>
+
+              <!-- Form View -->
+              <div id="reportFormView">
+                <div class="mobile-app-header">
+                  <h2>📋 Báo cáo Hiện trường</h2>
+                  <p>Gửi báo cáo nhanh từ công trường</p>
+                </div>
+                <div class="mobile-app-content">
+                  <form class="report-form" id="reportForm">
+                    <div class="form-group">
+                      <label class="form-label">Ảnh / Video hiện trường</label>
+                      <div class="report-upload-area" id="uploadArea">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+                        <p>Chạm để chụp ảnh hoặc quay video</p>
+                      </div>
+                      <div class="report-upload-preview" id="uploadPreview"></div>
+                      <input type="file" id="photoInput" accept="image/*,video/*" multiple style="display:none">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Dự án *</label>
+                      <select class="form-select" id="reportProject" required>
+                        <option value="">Chọn dự án</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Hạng mục *</label>
+                      <select class="form-select" id="reportCategory" required>
+                        <option value="">Chọn hạng mục</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Vị trí</label>
+                      <input class="form-input" id="reportLocation" placeholder="VD: Km 45+200">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Mô tả sự việc *</label>
+                      <textarea class="form-textarea" id="reportDescription" placeholder="Mô tả chi tiết tình trạng hiện trường..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Mức độ ảnh hưởng *</label>
+                      <div class="report-severity-options" id="severityOptions">
+                        <button type="button" class="report-severity-btn severity-critical" data-severity="critical">🔴 Nguy hiểm</button>
+                        <button type="button" class="report-severity-btn severity-high" data-severity="high">🟠 Cảnh báo</button>
+                        <button type="button" class="report-severity-btn severity-medium" data-severity="medium">🟡 TB</button>
+                        <button type="button" class="report-severity-btn severity-low" data-severity="low">🟢 BT</button>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="report-submit-btn">Gửi Báo cáo</button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Success View -->
+              <div id="reportSuccessView" style="display:none">
+                <div class="mobile-app-content">
+                  <div class="report-success">
+                    <div class="report-success-icon">✓</div>
+                    <h2 style="color:var(--text-primary-light);margin-bottom:8px">Gửi thành công!</h2>
+                    <p style="color:var(--text-muted-light);font-size:0.875rem;margin-bottom:24px">Báo cáo đã được gửi và Dashboard sẽ tự động cập nhật.</p>
+                    <button class="btn btn-primary" id="newReportBtn" style="width:100%;margin-bottom:8px">Gửi báo cáo mới</button>
+                    <a href="dashboard.html" class="btn btn-secondary" style="width:100%;display:block;text-align:center">Về Dashboard</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mobile-app-nav">
+                <a href="report.html" class="mobile-nav-item active">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Báo cáo
+                </a>
+                <a href="chat.html" class="mobile-nav-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                  Chat
+                </a>
+                <a href="dashboard.html" class="mobile-nav-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                  Dashboard
+                </a>
+                <a href="assistant.html" class="mobile-nav-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+                  AI
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/report.js"></script>
+</body>
+</html>
