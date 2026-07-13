@@ -78,8 +78,10 @@ const Layout = {
 
     return `
       <div class="sidebar-header">
-        <div class="sidebar-logo">${Icons.logo}</div>
-        <div class="sidebar-brand">
+      <div class="sidebar-logo-layout">
+          <img src="assets/dcg-logo.png" alt="Operation Hub Logo">
+      </div>        
+      <div class="sidebar-brand">
           <div class="sidebar-brand-name">Operation Hub</div>
           <div class="sidebar-brand-sub">Đèo Cả Group</div>
         </div>

@@ -74,7 +74,10 @@ function bindReportEvents() {
     }
 
     const user = Auth.getUser();
+    const reportCode = 'BC-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Date.now().toString().slice(-3);
+
     const report = {
+      id: reportCode,
       project: document.getElementById('reportProject').value,
       site: document.getElementById('reportCategory').value,
       category: document.getElementById('reportCategory').value,

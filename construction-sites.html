@@ -38,6 +38,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       if (!Auth.requireAuth()) return;
       Storage.init();
+       
       Layout.render('construction-sites', { pageTitle: 'Công trường' });
 
       const statusMap = {

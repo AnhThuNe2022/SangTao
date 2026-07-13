@@ -3,6 +3,19 @@
  * Toàn bộ dữ liệu mẫu cho hệ thống demo
  */
 
+const reportFirst = {
+    id: "BC-20260713-001",
+    project: "Cù Mông Tunnel",
+    site: "Hầm Cù Mông",
+    category: "Hầm",
+    location: "Km 45+200",
+    description: "Vết nứt bê tông hầm Cù Mông",
+    severity: "high",
+    reporter: "Trần Minh C",
+    avatar: "TMC",
+    hasImage: true
+};
+   // Storage.addReport(reportFirst, { skipChat: true });
 const MOCK_DATA = {
   // Thông tin người dùng đăng nhập
   users: [
@@ -230,8 +243,24 @@ const MOCK_DATA = {
   // Tin nhắn chat mẫu
   chatMessages: {
     'ch1': [
-      { id: 'm1', user: 'Trần Minh C', avatar: 'TMC', time: '08:30', text: 'Báo cáo: Phát hiện vết nứt bê tông tại Hầm Cù Mông km 45+200. Đính kèm ảnh hiện trường.', hasImage: true, imageDesc: 'Vết nứt bê tông vách hầm' },
-      { id: 'm2', user: 'AI Assistant', avatar: '🤖', time: '08:31', text: '🤖 **Phân tích AI:**\n\nPhát hiện vết nứt dọc trên vách hầm. Dựa trên hình ảnh:\n• Loại: Nứt co ngót bê tông\n• Mức độ: **Cao** - Cần xử lý trong 48h\n• Đề xuất: Kiểm tra bằng thiết bị siêu âm, bơm epoxy nếu rộng > 0.3mm\n• Tham khảo: KB-042 "Xử lý nứt bê tông hầm"', isBot: true },
+{
+    id: reportFirst.id,                     // ID của message
+    reportId: reportFirst.id,  // ID của báo cáo
+
+    user: reportFirst.reporter,
+    avatar: reportFirst.avatar,
+    time: "08:30",
+
+    text: `📋 **Báo cáo hiện trường ${reportFirst.id}**
+• Dự án: ${reportFirst.project}
+• Hạng mục: ${reportFirst.site}
+• Vị trí: ${reportFirst.location}
+• Mô tả: ${reportFirst.description}`,
+
+    hasImage: true,
+    imageDesc: "Vết nứt bê tông vách hầm"
+},    
+  //{ id: 'm2', user: 'AI Assistant', avatar: '🤖', time: '08:31', text: '🤖 **Phân tích AI:**\n\nPhát hiện vết nứt dọc trên vách hầm. Dựa trên hình ảnh:\n• Loại: Nứt co ngót bê tông\n• Mức độ: **Cao** - Cần xử lý trong 48h\n• Đề xuất: Kiểm tra bằng thiết bị siêu âm, bơm epoxy nếu rộng > 0.3mm\n• Tham khảo: KB-042 "Xử lý nứt bê tông hầm"', isBot: true },
       { id: 'm3', user: 'Lê Hoàng D', avatar: 'LHD', time: '08:45', text: 'Đã nhận. Tôi sẽ cử đội kỹ thuật xuống kiểm tra trong sáng nay. @Trần Minh C chuẩn bị thiết bị đo.' },
       { id: 'm4', user: 'Nguyễn Văn B', avatar: 'NVB', time: '09:00', text: 'Đây là vấn đề ưu tiên. Cập nhật tiến độ xử lý trên hệ thống mỗi 2 giờ.' },
       { id: 'm5', user: 'Trần Minh C', avatar: 'TMC', time: '09:15', text: 'Roger. Đang chuẩn bị thiết bị và di chuyển xuống hiện trường.', hasFile: true, fileName: 'Bao_cao_ky_thuat.pdf' }

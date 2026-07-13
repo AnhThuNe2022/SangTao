@@ -31,22 +31,18 @@
   border-bottom: var(--glass-border);
 }
 
-.sidebar-logo {
-  width: 40px;
+.sidebar-logo-layout {
+  width: 103px;
   height: 40px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  /* border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.sidebar-logo svg {
-  width: 24px;
-  height: 24px;
-  fill: #fff;
-}
+
 
 .sidebar-brand {
   overflow: hidden;

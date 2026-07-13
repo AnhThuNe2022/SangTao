@@ -13,8 +13,10 @@
     <!-- Visual Panel -->
     <div class="login-visual">
       <div class="login-visual-content">
-        <div class="login-visual-logo" id="loginLogo"></div>
-        <h1>Operation Hub</h1>
+<div class="sidebar-logo">
+    <img src="assets/dcg-logo.png" alt="Operation Hub Logo">
+</div>        
+<h1>Operation Hub</h1>
         <p>Trung tâm Điều hành Công trường Hợp nhất<br>Tập đoàn Phát triển Hạ tầng Đèo Cả</p>
         <div class="login-visual-features">
           <div class="login-feature">
@@ -82,7 +84,6 @@
   <script src="js/auth.js"></script>
   <script src="js/icons.js"></script>
   <script>
-    document.getElementById('loginLogo').innerHTML = Icons.logo;
     Storage.init();
     Auth.redirectIfLoggedIn();
 

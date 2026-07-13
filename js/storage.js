@@ -117,12 +117,14 @@ const Storage = {
         category: report.category || 'Hiện trường'
       });
     }
+    const customText = `📋 **Báo cáo hiện trường ${newReport.id}**\n• Dự án: ${report.project}\n• Hạng mục: ${report.site}\n• Vị trí: ${report.location || 'Chưa cập nhật'}\n• Mức độ: ${App.severityLabel(report.severity)}\n• Mô tả: ${report.description}`;
 
     if (!options.skipChat) {
       this.addChatMessage('ch1', {
+        id: newReport.id,
         user: report.reporter || 'Trần Minh C',
         avatar: report.avatar || 'TMC',
-        text: `📋 Báo cáo mới: ${report.description}`,
+        text: customText,
         hasImage: report.hasImage || false
       });
     }
@@ -194,8 +196,23 @@ const Storage = {
     this.set(this.KEYS.NOTIFICATIONS, notifications);
   }
 };
+const reportFirsts = {
+    id: "BC-20260713-001",
+    project: "Cù Mông Tunnel",
+    site: "Hầm Cù Mông",
+    category: "Hầm",
+    location: "Km 45+200",
+    description: "Vết nứt bê tông hầm Cù Mông",
+    severity: "high",
+    reporter: "Trần Minh C",
+    avatar: "TMC",
+    hasImage: true
+};
+if (!Storage.get(Storage.KEYS.REPORTS, [])
+    .some(r => r.id === reportFirsts.id)) {
 
-// Khởi tạo khi load
+    Storage.addReport(reportFirsts, { skipChat: true });
+}// Khởi tạo khi load
 if (typeof window !== 'undefined') {
   window.Storage = Storage;
 }

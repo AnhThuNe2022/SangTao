@@ -250,8 +250,8 @@ function renderLiveSites() {
   const sites = [
     ['Cao tốc Cam Lâm - Vĩnh Hảo', 'assets/live/cam-lam-vinh-hao.jpg'],
     ['Hầm số 2 - Hữu Nghị - Chi Lăng', 'assets/live/ham-so-2.jpg'],
-    ['Cảng Liên Chiểu', 'assets/live/cang-lien-chieu.jpg'],
-    ['Sân bay Long Thành', 'assets/live/san-bay-long-thanh.jpg']
+    ['HẦM ĐÈO CÙ MÔNG', 'assets/live/cu-mong.jpg'],
+    ['CAO TỐC BẮC GIANG - LẠNG SƠN', 'assets/live/bg-ls.jpg']
   ];
 
   container.innerHTML = sites.map(site => `

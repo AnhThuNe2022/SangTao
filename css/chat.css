@@ -123,7 +123,16 @@
 .chat-dm-avatar-wrap {
   position: relative;
 }
+.chat-report-form select{
+    background: #1f2937;
+    color: #fff;
+    border: 1px solid #374151;
+}
 
+.chat-report-form option{
+    background: #1f2937;
+    color: #fff;
+}
 /* Main Chat Area */
 .chat-main {
   display: flex;
