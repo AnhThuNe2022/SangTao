@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderChannels();
   renderMessages(currentChannel);
+  scrollChatToBottom(true);
   populateReportForm();
   bindChatEvents();
 });
@@ -47,6 +48,7 @@ function renderChannels() {
       el.classList.add('active');
       el.querySelector('.chat-channel-unread')?.remove();
       renderMessages(currentChannel);
+      scrollChatToBottom(true);
     });
   });
 }
@@ -77,9 +79,20 @@ function renderMessages(channelId) {
       </div>`;
   }).join('');
 
-  container.scrollTop = container.scrollHeight;
+  scrollChatToBottom();
 }
 
+function scrollChatToBottom(smooth = false) {
+  const container = document.getElementById("chatMessages");
+  if (!container) return;
+
+  requestAnimationFrame(() => {
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: smooth ? "smooth" : "auto"
+    });
+  });
+}
 function formatMessage(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -109,7 +122,7 @@ function bindChatEvents() {
 
     input.value = '';
     renderMessages(currentChannel);
-
+    scrollChatToBottom(true);
     // AI auto-reply if mentions concrete/technical keywords
     if (/nứt|bê tông|an toàn|sụt|hầm/i.test(text)) {
       setTimeout(() => {
@@ -120,6 +133,7 @@ function bindChatEvents() {
           isBot: true
         });
         renderMessages(currentChannel);
+        scrollChatToBottom(true);
       }, 1500);
     }
   }
@@ -243,5 +257,6 @@ function sendReportMessage() {
   form.classList.remove('active');
   document.getElementById('chatInput').placeholder = 'Nhập tin nhắn...';
   renderMessages(currentChannel);
+  scrollChatToBottom(true);
   App.toast('Đã ghi báo cáo vào hệ thống', 'success');
 }

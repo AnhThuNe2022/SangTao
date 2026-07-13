@@ -127,6 +127,7 @@
 /* Main Chat Area */
 .chat-main {
   display: flex;
+   height:90vh;
   flex-direction: column;
   background: var(--bg-dark-primary);
 }
