@@ -106,7 +106,7 @@ function renderSparkline(values) {
 }
 
 function renderMap() {
-  Charts.renderMap('projectMap', getSelectedProjects());
+   Charts.renderMap('projectMap', getSelectedProjects());
 }
 
 function renderProgressOverview() {

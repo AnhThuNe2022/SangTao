@@ -524,6 +524,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  color: white;
   max-width: 600px;
   margin: 0 auto;
 }

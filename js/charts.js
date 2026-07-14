@@ -157,8 +157,8 @@ const Charts = {
     };
 
     const pins = projects.map(p => {
-      const x = 80 + (p.lng - 102) * 12;
-      const y = 280 - (p.lat - 8) * 14;
+    const x = 105 + (p.lng - 102) * 14;
+const y = 260 - (p.lat - 8) * 15;
       const color = p.status === 'completed' ? statusColors.completed : statusColors[p.risk] || '#0078d4';
 
       return `
@@ -170,20 +170,18 @@ const Charts = {
     }).join('');
 
     container.innerHTML = `
-      <svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="mapBg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0d2137"/>
-            <stop offset="100%" stop-color="#0a1628"/>
-          </linearGradient>
-        </defs>
-        <rect width="400" height="350" fill="url(#mapBg)" rx="8"/>
-        <!-- Simplified Vietnam outline -->
-        <path d="M220,30 L250,50 L270,80 L280,120 L275,160 L260,200 L240,240 L220,270 L200,290 L180,300 L160,290 L150,260 L140,220 L130,180 L120,140 L115,100 L130,70 L160,45 L190,35 Z"
-          fill="rgba(0,120,212,0.08)" stroke="rgba(0,120,212,0.2)" stroke-width="1.5"/>
+   <div class="map-wrapper">
+    <object
+        id="vnMap"
+        data="assets/vietnam.svg"
+        type="image/svg+xml">
+    </object>
+
+    <svg class="map-pins" viewBox="0 0 400 600">
         ${pins}
-        <text x="200" y="330" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="11">Bản đồ Dự án - Việt Nam</text>
-      </svg>
+    </svg>
+</div>
+</div>
       <div class="map-legend">
         <div class="map-legend-item"><div class="map-legend-dot" style="background:#ff4d4f"></div> Rủi ro cao</div>
         <div class="map-legend-item"><div class="map-legend-dot" style="background:#ffa940"></div> Rủi ro TB</div>
@@ -199,6 +197,84 @@ const Charts = {
       });
     });
   }
+
+//  renderMap(containerId, projects) {
+//     const container = document.getElementById(containerId);
+//     if (!container) return;
+
+//     const statusColors = {
+//         high: '#ff4d4f',
+//         medium: '#ffa940',
+//         low: '#52c41a',
+//         completed: '#0078d4'
+//     };
+
+// fetch("../assets/vietnam.svg")
+//         .then(response => response.text())
+//         .then(svgText => {
+
+//             container.innerHTML = `
+//                 <div class="map-wrapper">
+//                     ${svgText}
+//                 </div>
+
+//                 <div class="map-legend">
+//                     <div class="map-legend-item">
+//                         <div class="map-legend-dot" style="background:#ff4d4f"></div>
+//                         Rủi ro cao
+//                     </div>
+//                     <div class="map-legend-item">
+//                         <div class="map-legend-dot" style="background:#ffa940"></div>
+//                         Rủi ro TB
+//                     </div>
+//                     <div class="map-legend-item">
+//                         <div class="map-legend-dot" style="background:#52c41a"></div>
+//                         Rủi ro thấp
+//                     </div>
+//                     <div class="map-legend-item">
+//                         <div class="map-legend-dot" style="background:#0078d4"></div>
+//                         Hoàn thành
+//                     </div>
+//                 </div>
+//             `;
+
+//             const svg = container.querySelector("svg");
+
+//             projects.forEach(p => {
+
+//                 const x = 80 + (p.lng - 102) * 12;
+//                 const y = 280 - (p.lat - 8) * 14;
+
+//                 const color = p.status === 'completed'
+//                     ? statusColors.completed
+//                     : statusColors[p.risk] || '#0078d4';
+
+//                 svg.insertAdjacentHTML("beforeend", `
+//                     <g class="map-pin" data-project="${p.id}">
+//                         <circle cx="${x}" cy="${y}" r="12"
+//                                 fill="${color}"
+//                                 opacity="0.2"
+//                                 class="map-pin-pulse"/>
+
+//                         <circle cx="${x}" cy="${y}" r="6"
+//                                 fill="${color}"
+//                                 stroke="#fff"
+//                                 stroke-width="2"/>
+
+//                         <title>${p.name} (${p.progress}%)</title>
+//                     </g>
+//                 `);
+//             });
+
+//             svg.querySelectorAll(".map-pin").forEach(pin => {
+//                 pin.addEventListener("click", () => {
+//                     location.href = `projects.html?id=${pin.dataset.project}`;
+//                 });
+//             });
+
+//         });
+// }
+
 };
 
 if (typeof window !== 'undefined') {

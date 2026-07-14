@@ -7,6 +7,43 @@
   margin: 0;
   padding: 0;
 }
+.map-wrapper {
+    position: relative;
+    width: 58%;
+    aspect-ratio: 527 / 658;
+    margin: 0 auto;
+}
+#vnMap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-pins {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.map-pins svg,
+.map-pins {
+    display: block;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+        opacity:.6;
+    }
+    100%{
+        transform:scale(2);
+        opacity:0;
+    }
+}
 .sidebar-logo{
     width: 180px;
     height: 180px;
