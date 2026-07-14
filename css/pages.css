@@ -532,6 +532,7 @@
 .assistant-suggestion {
   padding: 16px;
   background: var(--bg-dark-card);
+  color: white;
   border: var(--glass-border);
   border-radius: var(--radius-md);
   text-align: left;

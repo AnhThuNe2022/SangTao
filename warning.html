@@ -54,8 +54,11 @@
       let currentFilter = 'all';
 
       function renderStats() {
-        const warnings = Storage.get(Storage.KEYS.WARNINGS, MOCK_DATA.warnings);
-        const counts = { critical: 0, high: 0, medium: 0, low: 0 };
+const warnings = [
+    ...MOCK_DATA.warnings,
+    ...Storage.get(Storage.KEYS.WARNINGS, [])
+];    
+    const counts = { critical: 0, high: 0, medium: 0, low: 0 };
         warnings.forEach(w => counts[w.severity]++);
 
         document.getElementById('warningStats').innerHTML = [
