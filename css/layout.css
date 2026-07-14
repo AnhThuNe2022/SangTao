@@ -216,7 +216,8 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
-  color: var(--text-secondary-dark);
+  color: white;
+  /* color: var(--text-secondary-dark); */
 }
 
 .topbar-menu-btn:hover {
