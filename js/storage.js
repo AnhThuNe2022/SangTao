@@ -196,23 +196,24 @@ const Storage = {
     this.set(this.KEYS.NOTIFICATIONS, notifications);
   }
 };
-const reportFirsts = {
-    id: "BC-20260713-001",
-    project: "Cù Mông Tunnel",
-    site: "Hầm Cù Mông",
-    category: "Hầm",
-    location: "Km 45+200",
-    description: "Vết nứt bê tông hầm Cù Mông",
-    severity: "high",
-    reporter: "Trần Minh C",
-    avatar: "TMC",
-    hasImage: true
-};
-if (!Storage.get(Storage.KEYS.REPORTS, [])
-    .some(r => r.id === reportFirsts.id)) {
+// const reportFirsts = {
+//     id: "BC-20260713-001",
+//     project: "Cù Mông Tunnel",
+//     site: "Hầm Cù Mông",
+//     category: "Hầm",
+//     location: "Km 45+200",
+//     description: "Vết nứt bê tông hầm Cù Mông",
+//     severity: "high",
+//     reporter: "Trần Minh C",
+//     avatar: "TMC",
+//     hasImage: true
+// };
+// if (!Storage.get(Storage.KEYS.REPORTS, [])
+//     .some(r => r.id === reportFirsts.id)) {
 
-    Storage.addReport(reportFirsts, { skipChat: true });
-}// Khởi tạo khi load
+//     Storage.addReport(reportFirsts, { skipChat: true });
+// }
+// // Khởi tạo khi load
 if (typeof window !== 'undefined') {
   window.Storage = Storage;
 }
