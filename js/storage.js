@@ -42,7 +42,7 @@ const Storage = {
   /** Khởi tạo dữ liệu mặc định nếu chưa có */
   init() {
     if (!this.get(this.KEYS.REPORTS)) {
-      this.set(this.KEYS.REPORTS, []);
+      this.set(this.KEYS.REPORTS, MOCK_DATA.reports);
     }
     if (!this.get(this.KEYS.ACTIVITIES)) {
       this.set(this.KEYS.ACTIVITIES, MOCK_DATA.activities);
@@ -59,6 +59,9 @@ const Storage = {
     if (!this.get(this.KEYS.KPI)) {
       this.set(this.KEYS.KPI, MOCK_DATA.kpi);
     }
+    //  if (!this.get(this.KEYS.REPORTS)) {
+    //   this.set(this.KEYS.REPORTS, MOCK_DATA.reports);
+    // }
   },
 
   /** Lấy KPI (có thể đã cập nhật) */

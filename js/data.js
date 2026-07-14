@@ -18,6 +18,12 @@ const reportFirst = {
    // Storage.addReport(reportFirst, { skipChat: true });
 const MOCK_DATA = {
   // Thông tin người dùng đăng nhập
+     reports: [
+        reportFirst
+        // hoặc thêm nhiều report khác
+        // reportSecond,
+        // reportThird
+    ],
   users: [
     { id: 'u1', username: 'admin', password: 'admin123', name: 'Nguyễn Văn B', role: 'Giám đốc Điều hành', avatar: 'NVB', department: 'Ban Lãnh đạo' },
     { id: 'u2', username: 'engineer', password: '123456', name: 'Trần Minh C', role: 'Kỹ sư Hiện trường', avatar: 'TMC', department: 'Kỹ thuật' },
@@ -255,13 +261,16 @@ const MOCK_DATA = {
 • Dự án: ${reportFirst.project}
 • Hạng mục: ${reportFirst.site}
 • Vị trí: ${reportFirst.location}
+• Mức độ: Nguy hiểm
 • Mô tả: ${reportFirst.description}`,
+
 
     hasImage: true,
     imageDesc: "Vết nứt bê tông vách hầm"
 },    
   //{ id: 'm2', user: 'AI Assistant', avatar: '🤖', time: '08:31', text: '🤖 **Phân tích AI:**\n\nPhát hiện vết nứt dọc trên vách hầm. Dựa trên hình ảnh:\n• Loại: Nứt co ngót bê tông\n• Mức độ: **Cao** - Cần xử lý trong 48h\n• Đề xuất: Kiểm tra bằng thiết bị siêu âm, bơm epoxy nếu rộng > 0.3mm\n• Tham khảo: KB-042 "Xử lý nứt bê tông hầm"', isBot: true },
-      { id: 'm3', user: 'Lê Hoàng D', avatar: 'LHD', time: '08:45', text: 'Đã nhận. Tôi sẽ cử đội kỹ thuật xuống kiểm tra trong sáng nay. @Trần Minh C chuẩn bị thiết bị đo.' },
+  { id: reportFirst.id, reportId: reportFirst.id, user: 'AI Assistant', avatar: '🤖', time: '08:31', text: `🤖 Đã ghi nhận báo cáo ${reportFirst.id} vào hệ thống. Dashboard, Trung tâm Cảnh báo và Thông báo đã được cập nhật theo mức độ **Nguy hiểm**.`, isBot: true },   
+  { id: 'm3', user: 'Lê Hoàng D', avatar: 'LHD', time: '08:45', text: 'Đã nhận. Tôi sẽ cử đội kỹ thuật xuống kiểm tra trong sáng nay. @Trần Minh C chuẩn bị thiết bị đo.' },
       { id: 'm4', user: 'Nguyễn Văn B', avatar: 'NVB', time: '09:00', text: 'Đây là vấn đề ưu tiên. Cập nhật tiến độ xử lý trên hệ thống mỗi 2 giờ.' },
       { id: 'm5', user: 'Trần Minh C', avatar: 'TMC', time: '09:15', text: 'Roger. Đang chuẩn bị thiết bị và di chuyển xuống hiện trường.', hasFile: true, fileName: 'Bao_cao_ky_thuat.pdf' }
     ]
